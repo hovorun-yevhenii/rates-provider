@@ -1,12 +1,9 @@
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5000
-const handler = require(path.join(__dirname, 'src'))
+const getRates = require(path.join(__dirname, 'src/main'))
 const app = express()
 
-app.use((req, res, next) => {
+app.get('/', async (req, res) => {
     res.append('Access-Control-Allow-Origin', ['*']);
-    next();
-});
-
-app.get('/', (req, res) => res.json(handler())).listen(PORT)
+    res.json(await getRates())
+}).listen(process.env.PORT || 5000)
