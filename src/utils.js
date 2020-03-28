@@ -1,7 +1,7 @@
 const https = require('https');
 
 function minutesPassed(date){
-    const diff = (date - +new Date()) / 1000 / 60
+    const diff = (+new Date() - date) / 1000 / 60
     return Math.abs(Math.round(diff))
 }
 
