@@ -7,15 +7,13 @@ const CACHE_TIME_IN_MINUTES = 60
 module.exports = async () => {
     const cachedRates = require(ratesPath);
     const timeDiff = minutesPassed(cachedRates.timestamp)
-    const shouldUpdate = timeDiff > CACHE_TIME_IN_MINUTES
+    const returnCache = timeDiff < CACHE_TIME_IN_MINUTES
 
-    if (shouldUpdate) {
-        const newRates = await fetchRates()
+    if (returnCache) return cachedRates
 
-        fs.writeFile(ratesPath, JSON.stringify(newRates), () => {});
+    const newRates = await fetchRates(true)
 
-        return newRates
-    } else {
-        return cachedRates
-    }
+    fs.writeFile(ratesPath, JSON.stringify(newRates), () => {});
+
+    return newRates
 }
