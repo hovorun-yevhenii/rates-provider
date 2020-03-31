@@ -13,7 +13,7 @@ module.exports = async () => {
 
     const newRates = await fetchRates(true)
 
-    fs.writeFile(ratesPath, JSON.stringify(newRates), () => {});
+    fs.writeFile(ratesPath, JSON.stringify(newRates), () => {})
 
     return newRates
 }

@@ -4,7 +4,7 @@ const KEY_RESERVE = '027700360ab349d0b70f7d7098a8883d'
 
 function minutesPassed(date) {
     const diff = (+new Date() - date) / 1000 / 60
-    return Math.abs(Math.round(diff))
+    return Math.round(diff)
 }
 
 function fetchRates(prime) {
